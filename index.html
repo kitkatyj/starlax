@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlax Demo</title>
+    <link rel="stylesheet" href="https://use.typekit.net/hzy4ejt.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"> -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="js/starlax.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="has-text-centered container is-desktop">
+    <header class="hero is-fullheight is-dark">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-weight-light">Starlax</h1>
+                <p class="subtitle">Add a quick and lightweight HTML5 Canvas based parallax starfield in the background of your website.</p>
+                <div class="mt-3 is-size-5 is-inline-block">
+                    <p class="has-text-weight-semibold is-size-4">All you need is:</p>
+                    <code class="box prettyprint">var yourVariable = new Starlax();</code>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+    <section class="section">
+        <h2 class="title has-text-white">Customize</h2>
+        <div class="mb-4">
+            <strong class="has-text-white">Syntax:</strong>
+            <code class="box is-inline-block prettyprint">var starlax = new Starlax({ property: value });</code>
+        </div>
+        <table class="box table has-text-left is-hoverable px-0 py-0">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="prettyprint">targetCanvas</code></td>
+                    <td>A new <code class="prettyprint">&lt;canvas&gt;</code> is created.</td>
+                    <td>HTML Canvas element that will be configured. If nothing or a non-canvas element is specified, a background canvas will be created that fills the entire width and height of the window.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">backgroundColor</code></td>
+                    <td><code class="prettyprint">'#000033'</code></td>
+                    <td>Background Color.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">color</code></td>
+                    <td><code class="prettyprint">'#ffffff'</code></td>
+                    <td>Color of the stars.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">size</code></td>
+                    <td><code class="prettyprint">5</code></td>
+                    <td>Width of stars in pixels.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">sizeRandom</code></td>
+                    <td><code class="prettyprint">0.5</code></td>
+                    <td>Variety of random values based on size (Any value from 0 - 1)</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">zPos</code></td>
+                    <td><code class="prettyprint">6</code></td>
+                    <td>The stars position in Z space, and how strong the parallax effect is.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">zPosRandom</code></td>
+                    <td><code class="prettyprint">0.8</code></td>
+                    <td>Variety of random values based on Z Position (Any value from 0 - 1)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="section">
+        <h2 class="title has-text-white">Inline Demos</h2>
+        <div class="container">
+            <div class="card is-inline-block">
+                <div class="card-image">
+                    <canvas id="inline-demo"></canvas>
+                </div>
+                <div class="card-content has-text-left">
+                    <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
+                        targetCanvas: '#inline-demo',<br>
+                        backgroundColor: 'white',<br>
+                        color:'black',<br>
+                        size:20,<br>
+                        sizeRandom:0,<br>
+                        zPos:5,<br>
+                        zPosRandom:0<br></pre>
+                    });</code>
+                </div>
+            </div>
+            <div class="card is-inline-block">
+                <div class="card-image">
+                    <canvas id="inline-demo2"></canvas>
+                </div>
+                <div class="card-content has-text-left">
+                    <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
+                        targetCanvas: '#inline-demo2',<br>
+                        backgroundColor: 'black',<br>
+                        color:'white'</pre>
+                    });</code>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer has-text-white">
+        <p><strong class="has-text-white">Starlax</strong>, Copyright &copy; <a href="http://kitkatyj.github.io/">kitkatyj</a> 2020. </p>
+    </footer>
+</body>
+</html>
