@@ -2,6 +2,8 @@
 
 interface Config {
     targetCanvas? : string;
+    fadeIn? : boolean;
+    fadeInDuration? : number;
     backgroundColor? : string;
     color? : string;
     size? : number;
@@ -11,6 +13,8 @@ interface Config {
 }
 
 class Starlax {
+    readonly ticksPerSecond : number = 60;
+
     resizeTimer : any;
     timer : number = 0;
     canvas : HTMLCanvasElement;
@@ -25,7 +29,9 @@ class Starlax {
         var target = document.querySelector(config?.targetCanvas);
 
         this.config = {
-            backgroundColor : config?.backgroundColor || '#000033',
+            fadeIn : config?.fadeIn || true,
+            fadeInDuration : config?.fadeInDuration || 1,
+            backgroundColor : config?.backgroundColor || '#000000',
             color : config?.color || '#ffffff',
             size : config?.size || 5,
             sizeRandom : (0 <= config?.sizeRandom && config?.sizeRandom <= 1) ? config?.sizeRandom : 0.5,
@@ -85,7 +91,6 @@ class Starlax {
                 "posY":Math.round(Math.random() * this.canvas.height),
                 "size":Math.floor(this.config.size - this.config.size * this.config.sizeRandom + Math.random() * this.config.size * this.config.sizeRandom),
                 "zIndex":(this.config.zPos - this.config.zPos * this.config.zPosRandom + Math.random() * this.config.zPos * this.config.zPosRandom) + 1
-                // "zIndex":2+Math.floor(10*Math.random())
             });
         }
         // console.log(this.starfield);
@@ -107,7 +112,7 @@ class Starlax {
                 star.size,
                 0,2*Math.PI
             );
-            _c.globalAlpha = (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset*20)/20)) * ((12 - star.zIndex)/12)*0.6;
+            _c.globalAlpha = ((_s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) ? _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration) : 1) * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset*20)/20)) * ((12 - star.zIndex)/12)*0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
 

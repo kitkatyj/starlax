@@ -1,19 +1,22 @@
 /*! starlax.js - Copyright 2020 Kat YJ */
 var Starlax = (function () {
     function Starlax(config) {
-        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+        this.ticksPerSecond = 60;
         this.timer = 0;
         this.starfield = [];
         this.config = {};
         var _s = this;
         var target = document.querySelector((_a = config) === null || _a === void 0 ? void 0 : _a.targetCanvas);
         this.config = {
-            backgroundColor: ((_b = config) === null || _b === void 0 ? void 0 : _b.backgroundColor) || '#000033',
-            color: ((_d = config) === null || _d === void 0 ? void 0 : _d.color) || '#ffffff',
-            size: ((_e = config) === null || _e === void 0 ? void 0 : _e.size) || 5,
-            sizeRandom: (0 <= ((_f = config) === null || _f === void 0 ? void 0 : _f.sizeRandom) && ((_g = config) === null || _g === void 0 ? void 0 : _g.sizeRandom) <= 1) ? (_h = config) === null || _h === void 0 ? void 0 : _h.sizeRandom : 0.5,
-            zPos: (0 <= ((_j = config) === null || _j === void 0 ? void 0 : _j.sizeRandom)) ? (_k = config) === null || _k === void 0 ? void 0 : _k.zPos : 6,
-            zPosRandom: (0 <= ((_l = config) === null || _l === void 0 ? void 0 : _l.zPosRandom) && ((_m = config) === null || _m === void 0 ? void 0 : _m.zPosRandom) <= 1) ? (_o = config) === null || _o === void 0 ? void 0 : _o.zPosRandom : 0.8
+            fadeIn: ((_b = config) === null || _b === void 0 ? void 0 : _b.fadeIn) || true,
+            fadeInDuration: ((_d = config) === null || _d === void 0 ? void 0 : _d.fadeInDuration) || 1,
+            backgroundColor: ((_e = config) === null || _e === void 0 ? void 0 : _e.backgroundColor) || '#000000',
+            color: ((_f = config) === null || _f === void 0 ? void 0 : _f.color) || '#ffffff',
+            size: ((_g = config) === null || _g === void 0 ? void 0 : _g.size) || 5,
+            sizeRandom: (0 <= ((_h = config) === null || _h === void 0 ? void 0 : _h.sizeRandom) && ((_j = config) === null || _j === void 0 ? void 0 : _j.sizeRandom) <= 1) ? (_k = config) === null || _k === void 0 ? void 0 : _k.sizeRandom : 0.5,
+            zPos: (0 <= ((_l = config) === null || _l === void 0 ? void 0 : _l.sizeRandom)) ? (_m = config) === null || _m === void 0 ? void 0 : _m.zPos : 6,
+            zPosRandom: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.zPosRandom) && ((_p = config) === null || _p === void 0 ? void 0 : _p.zPosRandom) <= 1) ? (_q = config) === null || _q === void 0 ? void 0 : _q.zPosRandom : 0.8
         };
         console.log(this.config);
         if (target) {
@@ -68,7 +71,7 @@ var Starlax = (function () {
         this.starfield.forEach(function (star) {
             _c.beginPath();
             _c.arc(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size, 0, 2 * Math.PI);
-            _c.globalAlpha = (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset * 20) / 20)) * ((12 - star.zIndex) / 12) * 0.6;
+            _c.globalAlpha = ((_s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) ? _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration) : 1) * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset * 20) / 20)) * ((12 - star.zIndex) / 12) * 0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
             _s.ctx.globalAlpha = 1;
