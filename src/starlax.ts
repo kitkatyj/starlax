@@ -2,8 +2,11 @@
 
 interface Config {
     targetCanvas? : string;
+    shape? : string;
     fadeIn? : boolean;
     fadeInDuration? : number;
+    twinkle? : boolean; // !
+    twinkleFrequency? : number; // !
     backgroundColor? : string;
     color? : string;
     size? : number;
@@ -29,17 +32,16 @@ class Starlax {
         var target = document.querySelector(config?.targetCanvas);
 
         this.config = {
-            fadeIn : config?.fadeIn || true,
-            fadeInDuration : config?.fadeInDuration || 1,
-            backgroundColor : config?.backgroundColor || '#000000',
-            color : config?.color || '#ffffff',
-            size : config?.size || 5,
-            sizeRandom : (0 <= config?.sizeRandom && config?.sizeRandom <= 1) ? config?.sizeRandom : 0.5,
-            zPos : (0 <= config?.sizeRandom) ? config?.zPos : 6,
-            zPosRandom : (0 <= config?.zPosRandom && config?.zPosRandom <= 1) ? config?.zPosRandom : 0.8
+            shape :             config?.shape || 'circle',
+            fadeIn :            (config?.fadeIn == undefined) ? true : config?.fadeIn,
+            fadeInDuration :    config?.fadeInDuration || 1,
+            backgroundColor :   config?.backgroundColor || '#000000',
+            color :             config?.color || '#ffffff',
+            size :              config?.size || 5,
+            sizeRandom :        (0 <= config?.sizeRandom && config?.sizeRandom <= 1) ? config?.sizeRandom : 0.5,
+            zPos :              (0 <= config?.sizeRandom) ? config?.zPos : 6,
+            zPosRandom :        (0 <= config?.zPosRandom && config?.zPosRandom <= 1) ? config?.zPosRandom : 0.8
         }
-
-        console.log(this.config);
 
         if(target){
             // tries to find a specified canvas element
@@ -68,6 +70,8 @@ class Starlax {
         }
 
         this.ctx = this.canvas.getContext('2d');
+
+        //console.log(this.config);
 
         this.draw();
     }
@@ -106,17 +110,35 @@ class Starlax {
 
         this.starfield.forEach(function(star){
             _c.beginPath();
-            _c.arc(
-                star.posX,
-                _s.mod((star.posY - window.pageYOffset/star.zIndex),_s.canvas.height),
-                star.size,
-                0,2*Math.PI
-            );
-            _c.globalAlpha = ((_s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) ? _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration) : 1) * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset*20)/20)) * ((12 - star.zIndex)/12)*0.6;
+
+            switch(_s.config.shape){
+                case "square":
+                    _c.rect(
+                        star.posX,
+                        _s.mod((star.posY - window.pageYOffset/star.zIndex),_s.canvas.height),
+                        star.size*2,star.size*2
+                    );
+                    break;
+                default:
+                    _c.arc(
+                        star.posX,
+                        _s.mod((star.posY - window.pageYOffset/star.zIndex),_s.canvas.height),
+                        star.size,
+                        0,2*Math.PI
+                    );
+            }
+            
+            var fadeOpacity = 1;
+
+            if(_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)){
+                fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration)
+            };
+            
+            _c.globalAlpha = fadeOpacity * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset*20)/20)) * ((12 - star.zIndex)/12)*0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
 
-            _s.ctx.globalAlpha = 1;
+            _c.globalAlpha = 1;
         });
     
         this.timer++;

@@ -4,7 +4,7 @@ function init(){
 
     starlax = new Starlax({
         backgroundColor:'#000033',
-        fadeInDuration:1
+        shape:'square'
     }); // default appearance
 
     starlax2 = new Starlax({

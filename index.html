@@ -27,59 +27,6 @@
         </div>
     </header>
     <section class="section">
-        <h2 class="title has-text-white">Customize</h2>
-        <div class="mb-4">
-            <strong class="has-text-white">Syntax:</strong>
-            <code class="box is-inline-block prettyprint">var starlax = new Starlax({ property: value });</code>
-        </div>
-        <table class="box table has-text-left is-hoverable px-0 py-0">
-            <thead>
-                <tr>
-                    <th>Property</th>
-                    <th>Default</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code class="prettyprint">targetCanvas</code></td>
-                    <td>A new <code class="prettyprint">&lt;canvas&gt;</code> is created.</td>
-                    <td>HTML Canvas element that will be configured. If nothing or a non-canvas element is specified, a background canvas will be created that fills the entire width and height of the window.</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">backgroundColor</code></td>
-                    <td><code class="prettyprint">'#000033'</code></td>
-                    <td>Background Color.</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">color</code></td>
-                    <td><code class="prettyprint">'#ffffff'</code></td>
-                    <td>Color of the stars.</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">size</code></td>
-                    <td><code class="prettyprint">5</code></td>
-                    <td>Width of stars in pixels.</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">sizeRandom</code></td>
-                    <td><code class="prettyprint">0.5</code></td>
-                    <td>Variety of random values based on size (Any value from 0 - 1)</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">zPos</code></td>
-                    <td><code class="prettyprint">6</code></td>
-                    <td>The stars position in Z space, and how strong the parallax effect is.</td>
-                </tr>
-                <tr>
-                    <td><code class="prettyprint">zPosRandom</code></td>
-                    <td><code class="prettyprint">0.8</code></td>
-                    <td>Variety of random values based on Z Position (Any value from 0 - 1)</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <section class="section">
         <h2 class="title has-text-white">Inline Demos</h2>
         <div class="container">
             <div class="card is-inline-block">
@@ -111,6 +58,74 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section class="section">
+        <h2 class="title has-text-white">Customize</h2>
+        <div class="mb-4">
+            <strong class="has-text-white">Syntax:</strong>
+            <code class="box is-inline-block prettyprint">var starlax = new Starlax({ property: value });</code>
+        </div>
+        <table class="box table has-text-left is-hoverable px-0 py-0">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code class="prettyprint">targetCanvas</code></td>
+                    <td>A new <code class="prettyprint">&lt;canvas&gt;</code> is created.</td>
+                    <td>HTML Canvas element that will be configured. If nothing or a non-canvas element is specified, a background canvas will be created that fills the entire width and height of the window.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">shape</code></td>
+                    <td><code class="prettyprint">'circle'</code></td>
+                    <td>The shape that stars will take.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">fadeIn</code></td>
+                    <td><code class="prettyprint">true</code></td>
+                    <td>Stars will fade into view.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">fadeInDuration</code></td>
+                    <td><code class="prettyprint">1</code></td>
+                    <td>Duration of the fade in. (Value in seconds)</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">backgroundColor</code></td>
+                    <td><code class="prettyprint">'#000000'</code></td>
+                    <td>Background Color.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">color</code></td>
+                    <td><code class="prettyprint">'#ffffff'</code></td>
+                    <td>Color of the stars.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">size</code></td>
+                    <td><code class="prettyprint">5</code></td>
+                    <td>Width of stars in pixels.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">sizeRandom</code></td>
+                    <td><code class="prettyprint">0.5</code></td>
+                    <td>Variety of random values based on size (Any value from 0 - 1)</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">zPos</code></td>
+                    <td><code class="prettyprint">6</code></td>
+                    <td>The stars position in Z space, and how strong the parallax effect is.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">zPosRandom</code></td>
+                    <td><code class="prettyprint">0.8</code></td>
+                    <td>Variety of random values based on Z Position (Any value from 0 - 1)</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     <footer class="footer has-text-white">
         <p class="is-size-5"><strong class="has-text-white">Starlax</strong>, Copyright &copy; <a href="http://kitkatyj.github.io/">kitkatyj</a> 2020. </p>

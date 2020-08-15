@@ -1,7 +1,7 @@
 /*! starlax.js - Copyright 2020 Kat YJ */
 var Starlax = (function () {
     function Starlax(config) {
-        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t;
         this.ticksPerSecond = 60;
         this.timer = 0;
         this.starfield = [];
@@ -9,16 +9,16 @@ var Starlax = (function () {
         var _s = this;
         var target = document.querySelector((_a = config) === null || _a === void 0 ? void 0 : _a.targetCanvas);
         this.config = {
-            fadeIn: ((_b = config) === null || _b === void 0 ? void 0 : _b.fadeIn) || true,
-            fadeInDuration: ((_d = config) === null || _d === void 0 ? void 0 : _d.fadeInDuration) || 1,
-            backgroundColor: ((_e = config) === null || _e === void 0 ? void 0 : _e.backgroundColor) || '#000000',
-            color: ((_f = config) === null || _f === void 0 ? void 0 : _f.color) || '#ffffff',
-            size: ((_g = config) === null || _g === void 0 ? void 0 : _g.size) || 5,
-            sizeRandom: (0 <= ((_h = config) === null || _h === void 0 ? void 0 : _h.sizeRandom) && ((_j = config) === null || _j === void 0 ? void 0 : _j.sizeRandom) <= 1) ? (_k = config) === null || _k === void 0 ? void 0 : _k.sizeRandom : 0.5,
-            zPos: (0 <= ((_l = config) === null || _l === void 0 ? void 0 : _l.sizeRandom)) ? (_m = config) === null || _m === void 0 ? void 0 : _m.zPos : 6,
-            zPosRandom: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.zPosRandom) && ((_p = config) === null || _p === void 0 ? void 0 : _p.zPosRandom) <= 1) ? (_q = config) === null || _q === void 0 ? void 0 : _q.zPosRandom : 0.8
+            shape: ((_b = config) === null || _b === void 0 ? void 0 : _b.shape) || 'circle',
+            fadeIn: (((_d = config) === null || _d === void 0 ? void 0 : _d.fadeIn) == undefined) ? true : (_e = config) === null || _e === void 0 ? void 0 : _e.fadeIn,
+            fadeInDuration: ((_f = config) === null || _f === void 0 ? void 0 : _f.fadeInDuration) || 1,
+            backgroundColor: ((_g = config) === null || _g === void 0 ? void 0 : _g.backgroundColor) || '#000000',
+            color: ((_h = config) === null || _h === void 0 ? void 0 : _h.color) || '#ffffff',
+            size: ((_j = config) === null || _j === void 0 ? void 0 : _j.size) || 5,
+            sizeRandom: (0 <= ((_k = config) === null || _k === void 0 ? void 0 : _k.sizeRandom) && ((_l = config) === null || _l === void 0 ? void 0 : _l.sizeRandom) <= 1) ? (_m = config) === null || _m === void 0 ? void 0 : _m.sizeRandom : 0.5,
+            zPos: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.sizeRandom)) ? (_p = config) === null || _p === void 0 ? void 0 : _p.zPos : 6,
+            zPosRandom: (0 <= ((_q = config) === null || _q === void 0 ? void 0 : _q.zPosRandom) && ((_r = config) === null || _r === void 0 ? void 0 : _r.zPosRandom) <= 1) ? (_t = config) === null || _t === void 0 ? void 0 : _t.zPosRandom : 0.8
         };
-        console.log(this.config);
         if (target) {
             if (target instanceof HTMLCanvasElement) {
                 this.canvas = document.querySelector(config.targetCanvas);
@@ -70,11 +70,22 @@ var Starlax = (function () {
         _c.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.starfield.forEach(function (star) {
             _c.beginPath();
-            _c.arc(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size, 0, 2 * Math.PI);
-            _c.globalAlpha = ((_s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) ? _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration) : 1) * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset * 20) / 20)) * ((12 - star.zIndex) / 12) * 0.6;
+            switch (_s.config.shape) {
+                case "square":
+                    _c.rect(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size * 2, star.size * 2);
+                    break;
+                default:
+                    _c.arc(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size, 0, 2 * Math.PI);
+            }
+            var fadeOpacity = 1;
+            if (_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) {
+                fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration);
+            }
+            ;
+            _c.globalAlpha = fadeOpacity * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset * 20) / 20)) * ((12 - star.zIndex) / 12) * 0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
-            _s.ctx.globalAlpha = 1;
+            _c.globalAlpha = 1;
         });
         this.timer++;
         requestAnimationFrame(function () { _s.draw(); });
