@@ -5,8 +5,8 @@ interface Config {
     shape? : string;
     fadeIn? : boolean;
     fadeInDuration? : number;
-    twinkle? : boolean; // !
-    twinkleFrequency? : number; // !
+    twinkle? : boolean;
+    twinkleDuration? : number;
     backgroundColor? : string;
     color? : string;
     size? : number;
@@ -35,6 +35,8 @@ class Starlax {
             shape :             config?.shape || 'circle',
             fadeIn :            (config?.fadeIn == undefined) ? true : config?.fadeIn,
             fadeInDuration :    config?.fadeInDuration || 1,
+            twinkle :           (config?.twinkle == undefined) ? true : config?.twinkle,
+            twinkleDuration :  config?.twinkleDuration || 1,
             backgroundColor :   config?.backgroundColor || '#000000',
             color :             config?.color || '#ffffff',
             size :              config?.size || 5,
@@ -129,12 +131,12 @@ class Starlax {
             }
             
             var fadeOpacity = 1;
+            var twinkleOpacity = 1;
 
-            if(_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)){
-                fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration)
-            };
+            if(_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration);
+            if(_s.config.twinkle) twinkleOpacity = 0.5 + 0.5 * Math.sin((_s.timer / _s.ticksPerSecond / _s.config.twinkleDuration) * 2*Math.PI + star.twinkleOffset);
             
-            _c.globalAlpha = fadeOpacity * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset*20)/20)) * ((12 - star.zIndex)/12)*0.6;
+            _c.globalAlpha = fadeOpacity * twinkleOpacity * ((12 - star.zIndex)/12)*0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
 

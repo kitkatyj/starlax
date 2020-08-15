@@ -1,7 +1,7 @@
 /*! starlax.js - Copyright 2020 Kat YJ */
 var Starlax = (function () {
     function Starlax(config) {
-        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t;
+        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t, _u, _v, _w;
         this.ticksPerSecond = 60;
         this.timer = 0;
         this.starfield = [];
@@ -12,12 +12,14 @@ var Starlax = (function () {
             shape: ((_b = config) === null || _b === void 0 ? void 0 : _b.shape) || 'circle',
             fadeIn: (((_d = config) === null || _d === void 0 ? void 0 : _d.fadeIn) == undefined) ? true : (_e = config) === null || _e === void 0 ? void 0 : _e.fadeIn,
             fadeInDuration: ((_f = config) === null || _f === void 0 ? void 0 : _f.fadeInDuration) || 1,
-            backgroundColor: ((_g = config) === null || _g === void 0 ? void 0 : _g.backgroundColor) || '#000000',
-            color: ((_h = config) === null || _h === void 0 ? void 0 : _h.color) || '#ffffff',
-            size: ((_j = config) === null || _j === void 0 ? void 0 : _j.size) || 5,
-            sizeRandom: (0 <= ((_k = config) === null || _k === void 0 ? void 0 : _k.sizeRandom) && ((_l = config) === null || _l === void 0 ? void 0 : _l.sizeRandom) <= 1) ? (_m = config) === null || _m === void 0 ? void 0 : _m.sizeRandom : 0.5,
-            zPos: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.sizeRandom)) ? (_p = config) === null || _p === void 0 ? void 0 : _p.zPos : 6,
-            zPosRandom: (0 <= ((_q = config) === null || _q === void 0 ? void 0 : _q.zPosRandom) && ((_r = config) === null || _r === void 0 ? void 0 : _r.zPosRandom) <= 1) ? (_t = config) === null || _t === void 0 ? void 0 : _t.zPosRandom : 0.8
+            twinkle: (((_g = config) === null || _g === void 0 ? void 0 : _g.twinkle) == undefined) ? true : (_h = config) === null || _h === void 0 ? void 0 : _h.twinkle,
+            twinkleDuration: ((_j = config) === null || _j === void 0 ? void 0 : _j.twinkleDuration) || 1,
+            backgroundColor: ((_k = config) === null || _k === void 0 ? void 0 : _k.backgroundColor) || '#000000',
+            color: ((_l = config) === null || _l === void 0 ? void 0 : _l.color) || '#ffffff',
+            size: ((_m = config) === null || _m === void 0 ? void 0 : _m.size) || 5,
+            sizeRandom: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.sizeRandom) && ((_p = config) === null || _p === void 0 ? void 0 : _p.sizeRandom) <= 1) ? (_q = config) === null || _q === void 0 ? void 0 : _q.sizeRandom : 0.5,
+            zPos: (0 <= ((_r = config) === null || _r === void 0 ? void 0 : _r.sizeRandom)) ? (_t = config) === null || _t === void 0 ? void 0 : _t.zPos : 6,
+            zPosRandom: (0 <= ((_u = config) === null || _u === void 0 ? void 0 : _u.zPosRandom) && ((_v = config) === null || _v === void 0 ? void 0 : _v.zPosRandom) <= 1) ? (_w = config) === null || _w === void 0 ? void 0 : _w.zPosRandom : 0.8
         };
         if (target) {
             if (target instanceof HTMLCanvasElement) {
@@ -78,11 +80,12 @@ var Starlax = (function () {
                     _c.arc(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size, 0, 2 * Math.PI);
             }
             var fadeOpacity = 1;
-            if (_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration)) {
+            var twinkleOpacity = 1;
+            if (_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration))
                 fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration);
-            }
-            ;
-            _c.globalAlpha = fadeOpacity * (0.5 + 0.5 * Math.sin((_s.timer + star.twinkleOffset * 20) / 20)) * ((12 - star.zIndex) / 12) * 0.6;
+            if (_s.config.twinkle)
+                twinkleOpacity = 0.5 + 0.5 * Math.sin((_s.timer / _s.ticksPerSecond / _s.config.twinkleDuration) * 2 * Math.PI + star.twinkleOffset);
+            _c.globalAlpha = fadeOpacity * twinkleOpacity * ((12 - star.zIndex) / 12) * 0.6;
             _c.fillStyle = _s.config.color;
             _c.fill();
             _c.globalAlpha = 1;
