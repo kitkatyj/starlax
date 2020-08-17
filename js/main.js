@@ -3,13 +3,11 @@ var starlax,starlax2,starlax3;
 function init(){
 
     starlax = new Starlax({
-        backgroundColor:'#000033',
-        shape:'square',
-        twinkle: false
+        backgroundColor:'#000033'
     }); // default appearance
 
     starlax2 = new Starlax({
-        targetCanvas: '#inline-demo', // target a canvas element
+        targetCanvas: '#inline-demo1', // target a canvas element
         backgroundColor: 'white', // accepts any CSS value
         color:'black', // color of the stars
         size:20, // size of stars

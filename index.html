@@ -18,43 +18,46 @@
             <div class="container">
                 <h1 class="title is-1 has-text-weight-light">Starlax</h1>
                 <p class="subtitle">Add a quick and lightweight HTML5 Canvas based parallax starfield in the background of your website.</p>
-                <div class="mt-3 is-size-5 is-inline-block">
+                <div class="my-3 is-size-5 is-inline-block">
                     <p class="has-text-weight-semibold is-size-4">All you need is:</p>
                     <code class="box prettyprint">var yourVariable = new Starlax();</code>
+                </div>
+                <div class="my-6">
+                    <a class="button is-primary is-large is-outlined" href="https://raw.githubusercontent.com/kitkatyj/starlax/master/js/starlax.js"><span class="icon"><i class="fas fa-rocket"></i></span><span>Start now</span></a>
                 </div>
             </div>
             
         </div>
     </header>
-    <section class="section">
+    <section id="inline-demo" class="section">
         <h2 class="title has-text-white">Inline Demos</h2>
-        <div class="container">
-            <div class="card is-inline-block">
-                <div class="card-image">
-                    <canvas id="inline-demo"></canvas>
-                </div>
-                <div class="card-content has-text-left">
-                    <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
-                        targetCanvas: '#inline-demo',<br>
-                        backgroundColor: 'white',<br>
-                        color:'black',<br>
-                        size:20,<br>
-                        sizeRandom:0,<br>
-                        zPos:5,<br>
-                        zPosRandom:0<br></pre>
-                    });</code>
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-narrow">
+                <div class="box is-inline-block">
+                    <canvas id="inline-demo1"></canvas>
+                    <div class="starlax-code has-text-left">
+                        <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
+                            targetCanvas: '#inline-demo',<br>
+                            backgroundColor: 'white',<br>
+                            color:'black',<br>
+                            size:20,<br>
+                            sizeRandom:0,<br>
+                            zPos:5,<br>
+                            zPosRandom:0<br></pre>
+                        });</code>
+                    </div>
                 </div>
             </div>
-            <div class="card is-inline-block">
-                <div class="card-image">
+            <div class="column is-narrow">
+                <div class="box is-inline-block">
                     <canvas id="inline-demo2"></canvas>
-                </div>
-                <div class="card-content has-text-left">
-                    <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
-                        targetCanvas: '#inline-demo2',<br>
-                        backgroundColor: 'black',<br>
-                        color:'white'</pre>
-                    });</code>
+                    <div class="starlax-code has-text-left">
+                        <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
+                            targetCanvas: '#inline-demo2',<br>
+                            backgroundColor: 'black',<br>
+                            color:'white'</pre>
+                        });</code>
+                    </div>
                 </div>
             </div>
         </div>
