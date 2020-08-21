@@ -23,7 +23,11 @@ $card-content-padding: 1em;
 $footer-background-color: transparent;
 $footer-padding: 2em;
 
-@import "../bulma-0.9.0/bulma.sass";
+// @import "../bulma-0.9.0/bulma.sass";
+
+@import "../bulma-0.9.0/sass/base/_all.sass";
+@import "../bulma-0.9.0/sass/elements/_all.sass";
+@import "../bulma-0.9.0/sass/layout/_all.sass";
 
 html {
     background-color:#000033;

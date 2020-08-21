@@ -8,18 +8,25 @@ function init(){
 
     starlax2 = new Starlax({
         targetCanvas: '#inline-demo1', // target a canvas element
-        backgroundColor: 'white', // accepts any CSS value
         color:'black', // color of the stars
         size:20, // size of stars
         sizeRandom:0, // variety of random values based on size - value from 0 to 1
         zPos:5, // z
-        zPosRandom:0
+        zPosRandom:0,
+        shape:'square'
     });
 
     starlax3 = new Starlax({
-        backgroundColor: '#000',
+        backgroundColor: '#401705',
         targetCanvas: '#inline-demo2',
-        color:'white'
+        color:['#D3F8E2','#E4C1F9','#F694C1','#EDE7B1','#A9DEF9'],
+        twinkle:false,
+        zPosOpacity:false
+    });
+
+    document.querySelectorAll("#inline-demo canvas").forEach(function(canv){
+        canv.height = 256;
+        canv.width = 256;
     });
 
 }

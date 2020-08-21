@@ -1,7 +1,7 @@
 /*! starlax.js - Copyright 2020 Kat YJ */
 var Starlax = (function () {
     function Starlax(config) {
-        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t, _u, _v, _w;
+        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t, _u, _v, _w, _x, _y;
         this.ticksPerSecond = 60;
         this.timer = 0;
         this.starfield = [];
@@ -13,13 +13,14 @@ var Starlax = (function () {
             fadeIn: (((_d = config) === null || _d === void 0 ? void 0 : _d.fadeIn) == undefined) ? true : (_e = config) === null || _e === void 0 ? void 0 : _e.fadeIn,
             fadeInDuration: ((_f = config) === null || _f === void 0 ? void 0 : _f.fadeInDuration) || 1,
             twinkle: (((_g = config) === null || _g === void 0 ? void 0 : _g.twinkle) == undefined) ? true : (_h = config) === null || _h === void 0 ? void 0 : _h.twinkle,
-            twinkleDuration: ((_j = config) === null || _j === void 0 ? void 0 : _j.twinkleDuration) || 1,
+            twinkleDuration: ((_j = config) === null || _j === void 0 ? void 0 : _j.twinkleDuration) || 2,
             backgroundColor: (_k = config) === null || _k === void 0 ? void 0 : _k.backgroundColor,
             color: ((_l = config) === null || _l === void 0 ? void 0 : _l.color) || '#000',
             size: ((_m = config) === null || _m === void 0 ? void 0 : _m.size) || 5,
             sizeRandom: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.sizeRandom) && ((_p = config) === null || _p === void 0 ? void 0 : _p.sizeRandom) <= 1) ? (_q = config) === null || _q === void 0 ? void 0 : _q.sizeRandom : 0.5,
             zPos: (0 <= ((_r = config) === null || _r === void 0 ? void 0 : _r.sizeRandom)) ? (_t = config) === null || _t === void 0 ? void 0 : _t.zPos : 6,
-            zPosRandom: (0 <= ((_u = config) === null || _u === void 0 ? void 0 : _u.zPosRandom) && ((_v = config) === null || _v === void 0 ? void 0 : _v.zPosRandom) <= 1) ? (_w = config) === null || _w === void 0 ? void 0 : _w.zPosRandom : 0.8
+            zPosRandom: (0 <= ((_u = config) === null || _u === void 0 ? void 0 : _u.zPosRandom) && ((_v = config) === null || _v === void 0 ? void 0 : _v.zPosRandom) <= 1) ? (_w = config) === null || _w === void 0 ? void 0 : _w.zPosRandom : 0.8,
+            zPosOpacity: (((_x = config) === null || _x === void 0 ? void 0 : _x.zPosOpacity) == undefined) ? true : (_y = config) === null || _y === void 0 ? void 0 : _y.zPosOpacity
         };
         if (target) {
             if (target instanceof HTMLCanvasElement) {
@@ -60,7 +61,8 @@ var Starlax = (function () {
                 "posX": Math.round(Math.random() * this.canvas.width),
                 "posY": Math.round(Math.random() * this.canvas.height),
                 "size": Math.floor(this.config.size - this.config.size * this.config.sizeRandom + Math.random() * this.config.size * this.config.sizeRandom),
-                "zIndex": (this.config.zPos - this.config.zPos * this.config.zPosRandom + Math.random() * this.config.zPos * this.config.zPosRandom) + 1
+                "zIndex": (this.config.zPos - this.config.zPos * this.config.zPosRandom + Math.random() * this.config.zPos * this.config.zPosRandom) + 1,
+                "color": (Array.isArray(this.config.color)) ? this.config.color[Math.floor(Math.random() * this.config.color.length)] : this.config.color
             });
         }
     };
@@ -83,12 +85,15 @@ var Starlax = (function () {
             }
             var fadeOpacity = 1;
             var twinkleOpacity = 1;
+            var zPosOpacity = 1;
             if (_s.config.fadeIn && _s.timer < (_s.ticksPerSecond * _s.config.fadeInDuration))
                 fadeOpacity = _s.timer / (_s.ticksPerSecond * _s.config.fadeInDuration);
             if (_s.config.twinkle)
                 twinkleOpacity = 0.5 + 0.5 * Math.sin((_s.timer / _s.ticksPerSecond / _s.config.twinkleDuration) * 2 * Math.PI + star.twinkleOffset);
-            _c.globalAlpha = fadeOpacity * twinkleOpacity * ((12 - star.zIndex) / 12) * 0.6;
-            _c.fillStyle = _s.config.color;
+            if (_s.config.zPosOpacity)
+                zPosOpacity = ((12 - star.zIndex) / 12) * 0.6;
+            _c.globalAlpha = fadeOpacity * twinkleOpacity * zPosOpacity;
+            _c.fillStyle = star.color;
             _c.fill();
             _c.globalAlpha = 1;
         });

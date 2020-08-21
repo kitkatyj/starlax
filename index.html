@@ -37,7 +37,6 @@
                     <div class="starlax-code has-text-left">
                         <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
                             targetCanvas: '#inline-demo',<br>
-                            backgroundColor: 'white',<br>
                             color:'black',<br>
                             size:20,<br>
                             sizeRandom:0,<br>
@@ -53,8 +52,8 @@
                     <div class="starlax-code has-text-left">
                         <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
                             targetCanvas: '#inline-demo2',<br>
-                            backgroundColor: 'black',<br>
-                            color:'white'</pre>
+                            backgroundColor: '#401705',<br>
+                            color:[<br><pre class="ml-5">'#D3F8E2','#E4C1F9',<br>'#F694C1','#EDE7B1',<br>'#A9DEF9'</pre>]</pre>
                         });</code>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                 <tr>
                     <td><code class="prettyprint">color</code></td>
                     <td><code class="prettyprint">'#ffffff'</code></td>
-                    <td>Color of the stars.</td>
+                    <td>Color of the stars. Can be an array of color strings for multiple colors.</td>
                 </tr>
                 <tr>
                     <td><code class="prettyprint">size</code></td>
@@ -124,7 +123,7 @@
                 <tr>
                     <td><code class="prettyprint">sizeRandom</code></td>
                     <td><code class="prettyprint">0.5</code></td>
-                    <td>Variety of random values based on size (Any value from 0 - 1)</td>
+                    <td>Variety of random values based on size. (Any value from 0 - 1)</td>
                 </tr>
                 <tr>
                     <td><code class="prettyprint">zPos</code></td>
@@ -134,7 +133,12 @@
                 <tr>
                     <td><code class="prettyprint">zPosRandom</code></td>
                     <td><code class="prettyprint">0.8</code></td>
-                    <td>Variety of random values based on Z Position (Any value from 0 - 1)</td>
+                    <td>Variety of random values based on Z Position. (Any value from 0 - 1)</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">zPosOpacity</code></td>
+                    <td><code class="prettyprint">true</code></td>
+                    <td>Reduce star opacity according to Z space.</td>
                 </tr>
             </tbody>
         </table>
