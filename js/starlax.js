@@ -14,8 +14,8 @@ var Starlax = (function () {
             fadeInDuration: ((_f = config) === null || _f === void 0 ? void 0 : _f.fadeInDuration) || 1,
             twinkle: (((_g = config) === null || _g === void 0 ? void 0 : _g.twinkle) == undefined) ? true : (_h = config) === null || _h === void 0 ? void 0 : _h.twinkle,
             twinkleDuration: ((_j = config) === null || _j === void 0 ? void 0 : _j.twinkleDuration) || 1,
-            backgroundColor: ((_k = config) === null || _k === void 0 ? void 0 : _k.backgroundColor) || '#000000',
-            color: ((_l = config) === null || _l === void 0 ? void 0 : _l.color) || '#ffffff',
+            backgroundColor: (_k = config) === null || _k === void 0 ? void 0 : _k.backgroundColor,
+            color: ((_l = config) === null || _l === void 0 ? void 0 : _l.color) || '#000',
             size: ((_m = config) === null || _m === void 0 ? void 0 : _m.size) || 5,
             sizeRandom: (0 <= ((_o = config) === null || _o === void 0 ? void 0 : _o.sizeRandom) && ((_p = config) === null || _p === void 0 ? void 0 : _p.sizeRandom) <= 1) ? (_q = config) === null || _q === void 0 ? void 0 : _q.sizeRandom : 0.5,
             zPos: (0 <= ((_r = config) === null || _r === void 0 ? void 0 : _r.sizeRandom)) ? (_t = config) === null || _t === void 0 ? void 0 : _t.zPos : 6,
@@ -68,8 +68,10 @@ var Starlax = (function () {
         var _s = this;
         var _c = this.ctx;
         _c.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        _c.fillStyle = this.config.backgroundColor;
-        _c.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        if (this.config.backgroundColor) {
+            _c.fillStyle = this.config.backgroundColor;
+            _c.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        }
         this.starfield.forEach(function (star) {
             _c.beginPath();
             switch (_s.config.shape) {

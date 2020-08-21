@@ -12347,6 +12347,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding: 2em;
 }
 
+html {
+  background-color: #000033;
+}
+
 .hero .button {
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;

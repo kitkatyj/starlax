@@ -3,8 +3,8 @@ var starlax,starlax2,starlax3;
 function init(){
 
     starlax = new Starlax({
-        backgroundColor:'#000033'
-    }); // default appearance
+        color:'#fff'
+    });
 
     starlax2 = new Starlax({
         targetCanvas: '#inline-demo1', // target a canvas element
@@ -17,6 +17,7 @@ function init(){
     });
 
     starlax3 = new Starlax({
+        backgroundColor: '#000',
         targetCanvas: '#inline-demo2',
         color:'white'
     });

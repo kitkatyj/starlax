@@ -36,9 +36,9 @@ class Starlax {
             fadeIn :            (config?.fadeIn == undefined) ? true : config?.fadeIn,
             fadeInDuration :    config?.fadeInDuration || 1,
             twinkle :           (config?.twinkle == undefined) ? true : config?.twinkle,
-            twinkleDuration :  config?.twinkleDuration || 1,
-            backgroundColor :   config?.backgroundColor || '#000000',
-            color :             config?.color || '#ffffff',
+            twinkleDuration :   config?.twinkleDuration || 1,
+            backgroundColor :   config?.backgroundColor,
+            color :             config?.color || '#000',
             size :              config?.size || 5,
             sizeRandom :        (0 <= config?.sizeRandom && config?.sizeRandom <= 1) ? config?.sizeRandom : 0.5,
             zPos :              (0 <= config?.sizeRandom) ? config?.zPos : 6,
@@ -107,8 +107,11 @@ class Starlax {
         var _c = this.ctx;
 
         _c.clearRect(0,0,this.canvas.width,this.canvas.height);
-        _c.fillStyle = this.config.backgroundColor;
-        _c.fillRect(0,0,this.canvas.width,this.canvas.height);
+
+        if(this.config.backgroundColor){
+            _c.fillStyle = this.config.backgroundColor;
+            _c.fillRect(0,0,this.canvas.width,this.canvas.height);
+        }
 
         this.starfield.forEach(function(star){
             _c.beginPath();

@@ -25,6 +25,10 @@ $footer-padding: 2em;
 
 @import "../bulma-0.9.0/bulma.sass";
 
+html {
+    background-color:#000033;
+}
+
 .hero .button {
     transition:background-color 0.2s;
 }
