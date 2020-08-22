@@ -17,6 +17,7 @@ function init(){
     });
 
     starlax3 = new Starlax({
+        qtyMultiplier:3,
         backgroundColor: '#401705',
         targetCanvas: '#inline-demo2',
         color:['#D3F8E2','#E4C1F9','#F694C1','#EDE7B1','#A9DEF9'],

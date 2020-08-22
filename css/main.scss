@@ -18,6 +18,8 @@ $pre-background: transparent;
 $pre-padding:0;
 $pre-font-size:1em;
 
+$control-border-width: 2px;
+
 $card-content-padding: 1em;
 
 $footer-background-color: transparent;
@@ -25,8 +27,11 @@ $footer-padding: 2em;
 
 // @import "../bulma-0.9.0/bulma.sass";
 
+@import "../bulma-0.9.0/sass/utilities/_all.sass";
+@import "../bulma-0.9.0/sass/helpers/_all.sass";
 @import "../bulma-0.9.0/sass/base/_all.sass";
 @import "../bulma-0.9.0/sass/elements/_all.sass";
+@import "../bulma-0.9.0/sass/grid/_all.sass";
 @import "../bulma-0.9.0/sass/layout/_all.sass";
 
 html {

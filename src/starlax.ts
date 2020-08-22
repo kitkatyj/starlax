@@ -2,6 +2,7 @@
 
 interface Config {
     targetCanvas? : string;
+    qtyMultiplier? : number;
     shape? : string;
     fadeIn? : boolean;
     fadeInDuration? : number;
@@ -33,6 +34,7 @@ class Starlax {
         var target = document.querySelector(config?.targetCanvas);
 
         this.config = {
+            qtyMultiplier :     config?.qtyMultiplier || 1,
             shape :             config?.shape || 'circle',
             fadeIn :            (config?.fadeIn == undefined) ? true : config?.fadeIn,
             fadeInDuration :    config?.fadeInDuration || 1,
@@ -89,7 +91,7 @@ class Starlax {
 
     private setStarfield(){
         this.starfield = [];
-        var qty = Math.floor(this.canvas.width/75 * this.canvas.height/75);
+        var qty = this.config.qtyMultiplier * Math.floor(this.canvas.width/75 * this.canvas.height/75);
 
         for(let i = 0; i < qty; i++){
     

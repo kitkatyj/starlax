@@ -21,7 +21,7 @@
                     <p class="has-text-weight-semibold is-size-4">All you need is:</p>
                     <code class="box prettyprint">var yourVariable = new Starlax();</code>
                 </div>
-                <div class="my-6">
+                <div class="mt-6">
                     <a class="button is-primary is-large is-outlined" href="https://raw.githubusercontent.com/kitkatyj/starlax/master/js/starlax.js" download="" target="_blank"><span class="icon"><i class="fas fa-rocket"></i></span><span>Start now</span></a>
                 </div>
             </div>
@@ -51,6 +51,7 @@
                     <canvas id="inline-demo2"></canvas>
                     <div class="starlax-code has-text-left">
                         <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
+                            qtyMultiplier:3,<br>
                             targetCanvas: '#inline-demo2',<br>
                             backgroundColor: '#401705',<br>
                             color:[<br><pre class="ml-5">'#D3F8E2','#E4C1F9',<br>'#F694C1','#EDE7B1',<br>'#A9DEF9'</pre>]</pre>
@@ -79,6 +80,11 @@
                     <td><code class="prettyprint">targetCanvas</code></td>
                     <td>A new <code class="prettyprint">&lt;canvas&gt;</code> is created.</td>
                     <td>HTML Canvas element that will be configured. If nothing or a non-canvas element is specified, a background canvas will be created that fills the entire width and height of the window.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">qtyMultiplier</code></td>
+                    <td><code class="prettyprint">1</code></td>
+                    <td>Multiply the number of stars from the default.</td>
                 </tr>
                 <tr>
                     <td><code class="prettyprint">shape</code></td>
