@@ -36,13 +36,14 @@
                     <canvas id="inline-demo1"></canvas>
                     <div class="starlax-code has-text-left">
                         <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
-                            targetCanvas: '#inline-demo',<br>
-                            shape:'square',<br>
+                            backgroundColor:'#FFB5B6',<br>
+                            image:'heart-sharp.svg',<br>
+                            targetCanvas: '#inline-demo1',<br>
                             color:'black',<br>
-                            size:20,<br>
+                            size:40,<br>
                             sizeRandom:0,<br>
-                            zPos:5,<br>
-                            zPosRandom:0<br></pre>
+                            zPos:1,<br>
+                            zPosRandom:0</pre>
                         });</code>
                     </div>
                 </div>
@@ -148,6 +149,11 @@
                     <td><code class="prettyprint">zPosOpacity</code></td>
                     <td><code class="prettyprint">true</code></td>
                     <td>Reduce star opacity according to Z space.</td>
+                </tr>
+                <tr>
+                    <td><code class="prettyprint">invertScroll</code></td>
+                    <td><code class="prettyprint">false</code></td>
+                    <td>Invert the scroll direction of the starfield.</td>
                 </tr>
             </tbody>
         </table>

@@ -9,11 +9,11 @@ function init(){
     starlax2 = new Starlax({
         backgroundColor:'#FFB5B6',
         image:'../res/heart-sharp.svg',
-        targetCanvas: '#inline-demo1', // target a canvas element
-        color:'black', // color of the stars
-        size:40, // size of stars
-        sizeRandom:0, // variety of random values based on size - value from 0 to 1
-        zPos:1, // z
+        targetCanvas: '#inline-demo1',
+        color:'black',
+        size:40,
+        sizeRandom:0,
+        zPos:1,
         zPosRandom:0
     });
 
