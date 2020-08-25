@@ -8,7 +8,7 @@ function init(){
 
     starlax2 = new Starlax({
         backgroundColor:'#FFB5B6',
-        image:'../res/heart-sharp.svg',
+        image:'res/heart-sharp.svg',
         targetCanvas: '#inline-demo1',
         color:'black',
         size:40,
