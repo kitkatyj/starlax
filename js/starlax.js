@@ -1,7 +1,7 @@
 /*! starlax.js - Copyright 2020 Kat YJ */
 var Starlax = (function () {
     function Starlax(config) {
-        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t, _u, _v, _w, _x, _y, _z;
+        var _a, _b, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _t, _u, _v, _w, _x, _y, _z, _0, _1;
         this.ticksPerSecond = 60;
         this.timer = 0;
         this.starfield = [];
@@ -11,6 +11,7 @@ var Starlax = (function () {
         this.config = {
             qtyMultiplier: ((_b = config) === null || _b === void 0 ? void 0 : _b.qtyMultiplier) || 1,
             shape: ((_d = config) === null || _d === void 0 ? void 0 : _d.shape) || 'circle',
+            image: config.image,
             fadeIn: (((_e = config) === null || _e === void 0 ? void 0 : _e.fadeIn) == undefined) ? true : (_f = config) === null || _f === void 0 ? void 0 : _f.fadeIn,
             fadeInDuration: ((_g = config) === null || _g === void 0 ? void 0 : _g.fadeInDuration) || 1,
             twinkle: (((_h = config) === null || _h === void 0 ? void 0 : _h.twinkle) == undefined) ? true : (_j = config) === null || _j === void 0 ? void 0 : _j.twinkle,
@@ -21,7 +22,8 @@ var Starlax = (function () {
             sizeRandom: (0 <= ((_p = config) === null || _p === void 0 ? void 0 : _p.sizeRandom) && ((_q = config) === null || _q === void 0 ? void 0 : _q.sizeRandom) <= 1) ? (_r = config) === null || _r === void 0 ? void 0 : _r.sizeRandom : 0.5,
             zPos: (0 <= ((_t = config) === null || _t === void 0 ? void 0 : _t.sizeRandom)) ? (_u = config) === null || _u === void 0 ? void 0 : _u.zPos : 6,
             zPosRandom: (0 <= ((_v = config) === null || _v === void 0 ? void 0 : _v.zPosRandom) && ((_w = config) === null || _w === void 0 ? void 0 : _w.zPosRandom) <= 1) ? (_x = config) === null || _x === void 0 ? void 0 : _x.zPosRandom : 0.8,
-            zPosOpacity: (((_y = config) === null || _y === void 0 ? void 0 : _y.zPosOpacity) == undefined) ? true : (_z = config) === null || _z === void 0 ? void 0 : _z.zPosOpacity
+            zPosOpacity: (((_y = config) === null || _y === void 0 ? void 0 : _y.zPosOpacity) == undefined) ? true : (_z = config) === null || _z === void 0 ? void 0 : _z.zPosOpacity,
+            invertScroll: (((_0 = config) === null || _0 === void 0 ? void 0 : _0.invertScroll) == undefined) ? false : (_1 = config) === null || _1 === void 0 ? void 0 : _1.invertScroll
         };
         if (target) {
             if (target instanceof HTMLCanvasElement) {
@@ -56,6 +58,13 @@ var Starlax = (function () {
     Starlax.prototype.setStarfield = function () {
         this.starfield = [];
         var qty = this.config.qtyMultiplier * Math.floor(this.canvas.width / 75 * this.canvas.height / 75);
+        if (typeof this.config.image == "string") {
+            this.starImg = new Image();
+            this.starImg.src = this.config.image;
+        }
+        else if (this.config.image instanceof HTMLImageElement) {
+            this.starImg = this.config.image;
+        }
         for (var i = 0; i < qty; i++) {
             this.starfield.push({
                 "twinkleOffset": Math.random() * 2 * Math.PI,
@@ -77,13 +86,6 @@ var Starlax = (function () {
         }
         this.starfield.forEach(function (star) {
             _c.beginPath();
-            switch (_s.config.shape) {
-                case "square":
-                    _c.rect(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size * 2, star.size * 2);
-                    break;
-                default:
-                    _c.arc(star.posX, _s.mod((star.posY - window.pageYOffset / star.zIndex), _s.canvas.height), star.size, 0, 2 * Math.PI);
-            }
             var fadeOpacity = 1;
             var twinkleOpacity = 1;
             var zPosOpacity = 1;
@@ -94,8 +96,21 @@ var Starlax = (function () {
             if (_s.config.zPosOpacity)
                 zPosOpacity = ((12 - star.zIndex) / 12) * 0.6;
             _c.globalAlpha = fadeOpacity * twinkleOpacity * zPosOpacity;
-            _c.fillStyle = star.color;
-            _c.fill();
+            var scrollPos = _s.mod((_s.config.invertScroll) ? (star.posY + window.pageYOffset / star.zIndex) : (star.posY - window.pageYOffset / star.zIndex), _s.canvas.height);
+            if (_s.starImg) {
+                _c.drawImage(_s.starImg, star.posX - star.size / 2, scrollPos - star.size / 2, star.size, star.size);
+            }
+            else {
+                switch (_s.config.shape) {
+                    case "square":
+                        _c.rect(star.posX, scrollPos, star.size * 2, star.size * 2);
+                        break;
+                    default:
+                        _c.arc(star.posX, scrollPos, star.size, 0, 2 * Math.PI);
+                }
+                _c.fillStyle = star.color;
+                _c.fill();
+            }
             _c.globalAlpha = 1;
         });
         this.timer++;

@@ -4,6 +4,7 @@ interface Config {
     targetCanvas? : string;
     qtyMultiplier? : number;
     shape? : string;
+    image? : string | HTMLImageElement;
     fadeIn? : boolean;
     fadeInDuration? : number;
     twinkle? : boolean;
@@ -15,6 +16,7 @@ interface Config {
     zPos? : number;
     zPosRandom? : number;
     zPosOpacity? : boolean;
+    invertScroll? : boolean;
 }
 
 class Starlax {
@@ -26,6 +28,8 @@ class Starlax {
     ctx : CanvasRenderingContext2D;
     starfield = [];
 
+    starImg : HTMLImageElement;
+
     config : Config = {};
 
     constructor(config?:Config){
@@ -36,6 +40,7 @@ class Starlax {
         this.config = {
             qtyMultiplier :     config?.qtyMultiplier || 1,
             shape :             config?.shape || 'circle',
+            image :             config.image,
             fadeIn :            (config?.fadeIn == undefined) ? true : config?.fadeIn,
             fadeInDuration :    config?.fadeInDuration || 1,
             twinkle :           (config?.twinkle == undefined) ? true : config?.twinkle,
@@ -46,7 +51,8 @@ class Starlax {
             sizeRandom :        (0 <= config?.sizeRandom && config?.sizeRandom <= 1) ? config?.sizeRandom : 0.5,
             zPos :              (0 <= config?.sizeRandom) ? config?.zPos : 6,
             zPosRandom :        (0 <= config?.zPosRandom && config?.zPosRandom <= 1) ? config?.zPosRandom : 0.8,
-            zPosOpacity :       (config?.zPosOpacity == undefined) ? true : config?.zPosOpacity
+            zPosOpacity :       (config?.zPosOpacity == undefined) ? true : config?.zPosOpacity,
+            invertScroll :      (config?.invertScroll == undefined) ? false : config?.invertScroll
         }
 
         if(target){
@@ -93,8 +99,14 @@ class Starlax {
         this.starfield = [];
         var qty = this.config.qtyMultiplier * Math.floor(this.canvas.width/75 * this.canvas.height/75);
 
+        if(typeof this.config.image == "string"){
+            this.starImg = new Image();
+            this.starImg.src = this.config.image;
+        } else if (this.config.image instanceof HTMLImageElement) {
+            this.starImg = this.config.image;
+        }
+
         for(let i = 0; i < qty; i++){
-    
             this.starfield.push({
                 "twinkleOffset":Math.random() * 2 * Math.PI,
                 "posX":Math.round(Math.random() * this.canvas.width),
@@ -121,23 +133,6 @@ class Starlax {
         this.starfield.forEach(function(star){
             _c.beginPath();
 
-            switch(_s.config.shape){
-                case "square":
-                    _c.rect(
-                        star.posX,
-                        _s.mod((star.posY - window.pageYOffset/star.zIndex),_s.canvas.height),
-                        star.size*2,star.size*2
-                    );
-                    break;
-                default:
-                    _c.arc(
-                        star.posX,
-                        _s.mod((star.posY - window.pageYOffset/star.zIndex),_s.canvas.height),
-                        star.size,
-                        0,2*Math.PI
-                    );
-            }
-            
             var fadeOpacity = 1;
             var twinkleOpacity = 1;
             var zPosOpacity = 1;
@@ -147,8 +142,37 @@ class Starlax {
             if(_s.config.zPosOpacity) zPosOpacity = ((12 - star.zIndex)/12)*0.6;
 
             _c.globalAlpha = fadeOpacity * twinkleOpacity * zPosOpacity;
-            _c.fillStyle = star.color;
-            _c.fill();
+
+            var scrollPos = _s.mod((_s.config.invertScroll) ? (star.posY + window.pageYOffset/star.zIndex) : (star.posY - window.pageYOffset/star.zIndex),_s.canvas.height);
+
+            if(_s.starImg){
+                _c.drawImage(
+                    _s.starImg, 
+                    star.posX - star.size/2,
+                    scrollPos - star.size/2,
+                    star.size,star.size
+                );
+            } else {
+                switch(_s.config.shape){
+                    case "square":
+                        _c.rect(
+                            star.posX,
+                            scrollPos,
+                            star.size*2,star.size*2
+                        );
+                        break;
+                    default:
+                        _c.arc(
+                            star.posX,
+                            scrollPos,
+                            star.size,
+                            0,2*Math.PI
+                        );
+                }
+
+                _c.fillStyle = star.color;
+                _c.fill();
+            }
 
             _c.globalAlpha = 1;
         });

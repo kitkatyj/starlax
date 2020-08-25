@@ -22,7 +22,7 @@
                     <code class="box prettyprint">var yourVariable = new Starlax();</code>
                 </div>
                 <div class="mt-6">
-                    <a class="button is-primary is-large is-outlined" href="https://raw.githubusercontent.com/kitkatyj/starlax/master/js/starlax.js" download="" target="_blank"><span class="icon"><i class="fas fa-rocket"></i></span><span>Start now</span></a>
+                    <a class="button is-primary is-large is-outlined is-rounded" href="https://raw.githubusercontent.com/kitkatyj/starlax/master/js/starlax.js" download="" target="_blank"><span class="icon"><i class="fas fa-rocket"></i></span><span>Start now</span></a>
                 </div>
             </div>
             
@@ -37,6 +37,7 @@
                     <div class="starlax-code has-text-left">
                         <code class="prettyprint">var starlax = new Starlax({<br><pre class="ml-5">
                             targetCanvas: '#inline-demo',<br>
+                            shape:'square',<br>
                             color:'black',<br>
                             size:20,<br>
                             sizeRandom:0,<br>
@@ -54,6 +55,8 @@
                             qtyMultiplier:3,<br>
                             targetCanvas: '#inline-demo2',<br>
                             backgroundColor: '#401705',<br>
+                            twinkle:false,<br>
+                            zPosOpacity:false,<br>
                             color:[<br><pre class="ml-5">'#D3F8E2','#E4C1F9',<br>'#F694C1','#EDE7B1',<br>'#A9DEF9'</pre>]</pre>
                         });</code>
                     </div>
@@ -114,7 +117,7 @@
                 <tr>
                     <td><code class="prettyprint">backgroundColor</code></td>
                     <td><code class="prettyprint">null</code></td>
-                    <td>Background Color.</td>
+                    <td>Background Color. Otherwise it's transparent.</td>
                 </tr>
                 <tr>
                     <td><code class="prettyprint">color</code></td>

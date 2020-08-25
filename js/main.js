@@ -7,13 +7,14 @@ function init(){
     });
 
     starlax2 = new Starlax({
+        backgroundColor:'#FFB5B6',
+        image:'../res/heart-sharp.svg',
         targetCanvas: '#inline-demo1', // target a canvas element
         color:'black', // color of the stars
-        size:20, // size of stars
+        size:40, // size of stars
         sizeRandom:0, // variety of random values based on size - value from 0 to 1
-        zPos:5, // z
-        zPosRandom:0,
-        shape:'square'
+        zPos:1, // z
+        zPosRandom:0
     });
 
     starlax3 = new Starlax({
